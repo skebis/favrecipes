@@ -17,9 +17,9 @@ public class RecipeController : ControllerBase
         //_ingredientContext = ingredientContext;
     }
 
-    // GET: api/Recipe
+    // GET: api/recipe
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<RecipeDTO>>> GetRecipeItems()
+    public async Task<ActionResult<IEnumerable<RecipeDTO>>> Get()
     {
         return await _recipeContext.RecipeItems
             .Include(x => x.Ingredients)
@@ -27,7 +27,7 @@ public class RecipeController : ControllerBase
             .ToListAsync();
     }
 
-    // GET: api/Recipe/5
+    // GET: api/recipe/5
     // <snippet_GetByID>
     [HttpGet("{id}")]
     public async Task<ActionResult<RecipeDTO>> GetRecipeItem(long id)
@@ -43,7 +43,7 @@ public class RecipeController : ControllerBase
     }
     // </snippet_GetByID>
 
-    // PUT: api/Recipe/5
+    // PUT: api/recipe/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     // <snippet_Update>
     [HttpPut("{id}")]
@@ -75,7 +75,7 @@ public class RecipeController : ControllerBase
     }
     // </snippet_Update>
 
-    // POST: api/Recipe
+    // POST: api/recipe
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     // <snippet_Create>
     [HttpPost]
@@ -98,7 +98,7 @@ public class RecipeController : ControllerBase
     }
     // </snippet_Create>
 
-    // DELETE: api/Recipe/5
+    // DELETE: api/recipe/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRecipeItem(Guid id)
     {
