@@ -4,6 +4,20 @@
 
 <p *ngIf="!recipes?.length"><em>Requesting... or you don't have any recipes.</em></p>
 
+<form>
+  <label id="label-recipe-name">
+    <input id="input-recipe-name" type="text"/>
+  </label>
+  <label *ngFor="let ingredient of ingredients" id="label-recipe-ingredient">
+    <input id="input-recipe-ingredient" type="text"/>
+  </label>
+  <button id="button-add-ingredient-row" (click)="AddNewIngredient()">Add ingredient row</button>
+  <label id="label-recipe-description">
+    <input id="input-recipe-description" type="text"/>
+  </label>
+  <button id="button-add-recipe" (click)="AddRecipe()">Add recipe</button>
+</form>
+
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="recipes.length">
   <thead>
     <tr>
