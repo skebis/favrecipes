@@ -18,7 +18,7 @@
   <button id="button-add-recipe" (click)="AddRecipe()">Add recipe</button>
 </form>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="recipes.length">
+<table *ngIf="recipes.length">
   <thead>
     <tr>
       <th>Name</th>
