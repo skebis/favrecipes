@@ -9,7 +9,18 @@ export function getBaseUrl() {
 }
 
 const providers = [
-  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
+  {
+    provide: 'BASE_URL', useFactory: getBaseUrl, deps: []
+  },
+  {
+    provide: 'BASE_API_URL', useFactory: () => "api/", deps: []
+  },
+  {
+    provide: 'GET_RECIPE', useFactory:() => "recipe", deps: []
+  },
+  {
+    provide: 'POST_RECIPE', useFactory: () => "recipe", deps: []
+  }
 ];
 
 if (environment.production) {

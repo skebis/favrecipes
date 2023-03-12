@@ -10,4 +10,6 @@ public class RecipeContext : DbContext
     }
 
     public DbSet<Recipe> RecipeItems { get; set; } = null!;
+    public DbSet<Ingredient> IngredientItems { get; set; } = null!;
+
 }

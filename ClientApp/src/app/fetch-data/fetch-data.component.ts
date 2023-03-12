@@ -3,28 +3,30 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  templateUrl: './fetch-data.component.html',
+  styleUrls: ['./fetch-data.component.css']
 })
 
 @Injectable()
 export class FetchDataComponent {
-  public recipes: Recipe[] = [];
-  public ingredients: Ingredient[] = [];
-  public baseApiUrl: string = "api/";
-  public apiGetRecipe: string = "recipe";
-  public apiPostRecipe: string = "recipe";
-  public recipe: Recipe = {
-    name: 'uusi resepti',
-    ingredients: [{
-      name: 'test ingredient',
-      amount: 5,
-      unit: 'kg'
+   recipes: Recipe[] = [];
+   ingredients: Ingredient[] = [];
+   recipe: Recipe = {
+    Name: '',
+    Ingredients: [{
+      name: '',
+      amount: 0,
+      unit: ''
     }],
-    description: 'tässä uusi hieno resepti'
+    Description: ''
   };
   
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string,
+    @Inject('BASE_API_URL') private baseApiUrl: string,
+    @Inject('GET_RECIPE') private apiGetRecipe: string,
+    @Inject('POST_RECIPE') private apiPostRecipe: string) {
   }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class FetchDataComponent {
     // Unsubscribes and such
   }
 
-  public AddRecipe() {
+  public addRecipe() {
     
     this.http.post<Recipe>(this.baseUrl + this.baseApiUrl + this.apiPostRecipe,
       this.recipe
@@ -46,19 +48,19 @@ export class FetchDataComponent {
       }, error => console.error(error));
     this.recipes.push(this.recipe);
   }
-  public AddNewIngredient() {
+  public addNewIngredient() {
     this.ingredients.push({
-        name: 'test ingredient',
-        amount: 5,
-        unit: 'kg'
+        name: '',
+        amount: 0,
+        unit: ''
     });
   }
 }
 
 interface Recipe {
-  name: string;
-  ingredients: Ingredient[];
-  description: string;
+  Name: string;
+  Ingredients: Ingredient[];
+  Description: string;
 }
 interface Ingredient {
   name: string;

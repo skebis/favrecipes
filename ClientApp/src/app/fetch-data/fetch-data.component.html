@@ -5,17 +5,20 @@
 <p *ngIf="!recipes?.length"><em>Requesting... or you don't have any recipes.</em></p>
 
 <form>
-  <label id="label-recipe-name">
-    <input id="input-recipe-name" type="text"/>
-  </label>
-  <label *ngFor="let ingredient of ingredients" id="label-recipe-ingredient">
-    <input id="input-recipe-ingredient" type="text"/>
-  </label>
-  <button id="button-add-ingredient-row" (click)="AddNewIngredient()">Add ingredient row</button>
-  <label id="label-recipe-description">
-    <input id="input-recipe-description" type="text"/>
-  </label>
-  <button id="button-add-recipe" (click)="AddRecipe()">Add recipe</button>
+  <mat-form-field class="label-form">
+    <mat-label class="label-recipe-name">Name</mat-label>
+    <input matInput class="input-recipe-name" type="text" [(ngModel)]="recipe.Name" name="first" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label class="label-recipe-ingredient">Ingredient</mat-label>
+    <input matInput class="input-recipe-ingredient" type="text" />
+  </mat-form-field>
+  <button class="button-add-ingredient-row" (click)="addNewIngredient()">Add ingredient row</button>
+  <mat-form-field>
+    <mat-label class="label-recipe-description">Description</mat-label>
+    <input matInput class="input-recipe-description" type="text" [(ngModel)]="recipe.Description" name="first" />
+  </mat-form-field>
+  <button class="button-add-recipe" (click)="addRecipe()">Add recipe</button>
 </form>
 
 <table *ngIf="recipes.length">
@@ -28,9 +31,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let recipe of recipes">
-      <td>{{ recipe.name }}</td>
-      <td>{{ recipe.description }}</td>
-      <td *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }} {{ingredient.amount}} {{ingredient.unit}}</td>
+      <td>{{ recipe.Name }}</td>
+      <td>{{ recipe.Description }}</td>
+      <td *ngFor="let ingredient of recipe.Ingredients">{{ ingredient.name }} {{ingredient.amount}} {{ingredient.unit}}</td>
     </tr>
   </tbody>
 </table>
