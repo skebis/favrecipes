@@ -8,10 +8,10 @@ button {
     margin: 4px;
 }
 
-tr{
-    padding-right: 8px;
-}
-
 mat-form-field{
     margin: 4px;
+}
+
+table {
+    margin: 10px;
 }

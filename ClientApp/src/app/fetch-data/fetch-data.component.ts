@@ -10,7 +10,12 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class FetchDataComponent implements OnInit, OnDestroy{
   recipes: Recipe[] = [];
-   ingredients: Ingredient[] = [];
+  ingredients: Ingredient[] = [];
+  ingredient: Ingredient = {
+    name: '',
+    amount: 0,
+    unit: ''
+  };
    recipe: Recipe = {
      name: '',
      ingredients: [{
@@ -23,7 +28,6 @@ export class FetchDataComponent implements OnInit, OnDestroy{
 
   // Mat table definitions
   displayedColumns: string[] = ['name', 'description', 'ingredients'];
-  dataSource = this.recipes;
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
@@ -52,7 +56,7 @@ export class FetchDataComponent implements OnInit, OnDestroy{
     this.recipes.push(this.recipe);
   }
   public addNewIngredient() {
-    this.ingredients.push({
+    this.recipe.ingredients.push({
         name: '',
         amount: 0,
         unit: ''
