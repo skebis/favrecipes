@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable } from '@angular/core';
+import { Component, Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,19 +8,22 @@ import { HttpClient } from '@angular/common/http';
 })
 
 @Injectable()
-export class FetchDataComponent {
-   recipes: Recipe[] = [];
+export class FetchDataComponent implements OnInit, OnDestroy{
+  recipes: Recipe[] = [];
    ingredients: Ingredient[] = [];
    recipe: Recipe = {
-    Name: '',
-    Ingredients: [{
-      name: '',
-      amount: 0,
-      unit: ''
-    }],
-    Description: ''
-  };
-  
+     name: '',
+     ingredients: [{
+       name: '',
+       amount: 0,
+       unit: ''
+     }],
+     description: ''
+   };
+
+  // Mat table definitions
+  displayedColumns: string[] = ['name', 'description', 'ingredients'];
+  dataSource = this.recipes;
 
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
@@ -58,9 +61,9 @@ export class FetchDataComponent {
 }
 
 interface Recipe {
-  Name: string;
-  Ingredients: Ingredient[];
-  Description: string;
+  name: string;
+  ingredients: Ingredient[];
+  description: string;
 }
 interface Ingredient {
   name: string;
