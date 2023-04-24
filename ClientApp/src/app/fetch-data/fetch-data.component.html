@@ -18,15 +18,15 @@
 <div *ngFor="let ing of recipe.ingredients">
   <mat-form-field>
     <mat-label class="label-recipe-ingredient-name">Ingredient name</mat-label>
-    <input matInput class="input-recipe-ingredient-name" type="text" [(ngModel)]="ingredient.name" />
+    <input matInput class="input-recipe-ingredient-name" type="text" [(ngModel)]="ing.name" />
   </mat-form-field>
   <mat-form-field>
     <mat-label class="label-recipe-ingredient-amount">Ingredient amount</mat-label>
-    <input matInput class="input-recipe-ingredient-amount" type="number" />
+    <input matInput class="input-recipe-ingredient-amount" type="number" [(ngModel)]="ing.amount" />
   </mat-form-field>
   <mat-form-field>
     <mat-label class="label-recipe-ingredient-unit">Ingredient unit</mat-label>
-    <input matInput class="input-recipe-ingredient-unit" type="text" />
+    <input matInput class="input-recipe-ingredient-unit" type="text" [(ngModel)]="ing.unit" />
   </mat-form-field>
 </div>
 <button mat-raised-button color="primary" class="button-add-ingredient-row" (click)="addNewIngredient()">Add ingredient row</button>
@@ -44,7 +44,14 @@
   </ng-container>
   <ng-container matColumnDef="ingredients">
     <mat-header-cell *matHeaderCellDef>Ingredients</mat-header-cell>
-    <mat-cell *matCellDef="let recipe"> {{recipe.ingredients[0].name}} </mat-cell>
+    <mat-cell *matCellDef="let recipe">
+      <ng-container *ngFor="let ingredient of recipe.ingredients">
+        {{ingredient.name}}
+      </ng-container>
+      <ng-template #emptyIngredients>
+        <span>No ingredients</span>
+      </ng-template>
+    </mat-cell>
   </ng-container>
   <!--<tbody>
     <tr *ngFor="let recipe of recipes">

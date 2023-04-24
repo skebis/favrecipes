@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,22 +9,15 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class FetchDataComponent implements OnInit, OnDestroy{
+  // recipes is the list of all current recipes in a table. Used for showing recipes to user.
   recipes: Recipe[] = [];
-  ingredients: Ingredient[] = [];
-  ingredient: Ingredient = {
+
+  // recipe is the current recipe that is being edited and added.
+  recipe: Recipe = {
     name: '',
-    amount: 0,
-    unit: ''
-  };
-   recipe: Recipe = {
-     name: '',
-     ingredients: [{
-       name: '',
-       amount: 0,
-       unit: ''
-     }],
-     description: ''
-   };
+    ingredients: [],
+    description: ''
+  }
 
   // Mat table definitions
   displayedColumns: string[] = ['name', 'description', 'ingredients'];
@@ -46,15 +39,19 @@ export class FetchDataComponent implements OnInit, OnDestroy{
     // Unsubscribes and such
   }
 
-  public addRecipe() {
-    
-    this.http.post<Recipe>(this.baseUrl + this.baseApiUrl + this.apiPostRecipe,
-      this.recipe
-      ).subscribe(result => {
-      console.log(result);
-      }, error => console.error(error));
-    this.recipes.push(this.recipe);
+  ngOnChanges() {
+    // Change detection things here
   }
+
+  public addRecipe() {
+    this.http.post<Recipe>(this.baseUrl + this.baseApiUrl + this.apiPostRecipe, this.recipe).subscribe(result => {
+      console.log(result);
+      this.recipes.push(this.recipe);
+    }, error => console.error(error));
+    this.clearRecipe();
+    
+  }
+
   public addNewIngredient() {
     this.recipe.ingredients.push({
         name: '',
@@ -62,6 +59,15 @@ export class FetchDataComponent implements OnInit, OnDestroy{
         unit: ''
     });
   }
+
+  public clearRecipe() {
+    this.recipe = {
+      name: '',
+      ingredients: [],
+      description: ''
+    }
+  }
+
 }
 
 interface Recipe {
