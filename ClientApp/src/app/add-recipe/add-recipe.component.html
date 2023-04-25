@@ -6,13 +6,14 @@
 <p *ngIf="!recipes?.length"><em>Requesting... or you don't have any recipes.</em></p>
 
 
-<mat-form-field>
+<mat-form-field class="recipe-name">
   <mat-label class="label-recipe-name">Name</mat-label>
-  <input matInput class="input-recipe-name" type="text" [(ngModel)]="recipe.name" name="first" />
+  <input matInput class="input-recipe-name" type="text" [(ngModel)]="recipe.name" />
 </mat-form-field>
-<mat-form-field>
+<br />
+<mat-form-field class="recipe-description">
   <mat-label class="label-recipe-description">Description</mat-label>
-  <textarea matInput class="input-recipe-description" [(ngModel)]="recipe.description" name="first"></textarea>
+  <textarea matInput class="input-recipe-description" [(ngModel)]="recipe.description"></textarea>
 </mat-form-field>
 <br />
 <div *ngFor="let ing of recipe.ingredients">
@@ -29,7 +30,7 @@
     <input matInput class="input-recipe-ingredient-unit" type="text" [(ngModel)]="ing.unit" />
   </mat-form-field>
 </div>
-<button mat-raised-button color="primary" class="button-add-ingredient-row" (click)="addNewIngredient()">Add ingredient row</button>
+<button mat-raised-button color="raised" class="button-add-ingredient-row" (click)="addNewIngredient()">Add ingredient row</button>
 <br />
 <button mat-raised-button color="primary" class="button-add-recipe" (click)="addRecipe()">Add recipe</button>
 
@@ -49,7 +50,7 @@
         {{ingredient.name}}
       </ng-container>
       <ng-template #emptyIngredients>
-        <span>No ingredients</span>
+        No ingredients
       </ng-template>
     </mat-cell>
   </ng-container>

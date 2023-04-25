@@ -1,0 +1,25 @@
+.recipe-name {
+  min-width: 250px;
+}
+
+.recipe-description {
+  min-height: 10px;
+  min-width: 350px;
+}
+
+mat-form-field, button, table {
+  margin: 5px;
+
+
+  height: 100%;
+  width: 100%;
+}
+
+mat-form-field {
+    max-width: 500px;
+}
+
+button {
+    max-width: 200px;
+    min-width: 170px;
+}
