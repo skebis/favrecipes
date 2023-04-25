@@ -8,18 +8,16 @@
 }
 
 mat-form-field, button, table {
-  margin: 5px;
-
-
-  height: 100%;
-  width: 100%;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 mat-form-field {
-    max-width: 500px;
+    margin-left: 5px;
 }
 
 button {
+    margin-left: 5px;
     max-width: 200px;
-    min-width: 170px;
+    min-width: 100px;
 }

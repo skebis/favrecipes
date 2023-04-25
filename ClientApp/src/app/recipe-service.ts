@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Recipe } from "./classes/recipe";
 
 @Injectable()
@@ -12,15 +13,11 @@ export class RecipeService {
 
   }
 
-  public getRecipes() : any {
-    this.http.get<Recipe[]>(this.baseUrl + this.baseApiUrl + this.apiGetRecipe).subscribe(result => {
-      return result;
-    }, error => console.error(error));
+  public getRecipes(): Observable<any> {
+    return this.http.get<Recipe[]>(this.baseUrl + this.baseApiUrl + this.apiGetRecipe);
   }
 
-  public postRecipe(recipe : Recipe) : any {
-    this.http.post<Recipe>(this.baseUrl + this.baseApiUrl + this.apiPostRecipe, recipe).subscribe(result => {
-      return result;
-    }, error => console.error(error));
+  public postRecipe(recipe: Recipe): Observable<any> {
+    return this.http.post<Recipe>(this.baseUrl + this.baseApiUrl + this.apiPostRecipe, recipe);
   }
 }

@@ -11,6 +11,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
     HomeComponent,
     CounterComponent,
     AddRecipeComponent,
+    RecipeListComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

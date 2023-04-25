@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Recipe } from '../classes/recipe';
 import { RecipeService } from '../recipe-service';
 
@@ -10,9 +11,7 @@ import { RecipeService } from '../recipe-service';
 })
 
 @Injectable()
-export class AddRecipeComponent implements OnInit, OnDestroy{
-  // recipes is the list of all current recipes in a table. Used for showing recipes to user.
-  recipes: Recipe[] = [];
+export class AddRecipeComponent implements OnInit, OnDestroy {
 
   // recipe is the current recipe that is being edited and added.
   recipe: Recipe = {
@@ -21,15 +20,17 @@ export class AddRecipeComponent implements OnInit, OnDestroy{
     description: ''
   }
 
-  // Mat table definitions
-  displayedColumns: string[] = ['name', 'description', 'ingredients'];
-
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService,
+    public dialogRef: MatDialogRef<AddRecipeComponent> ) {
 
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   ngOnInit() {
-    this.recipes = this.recipeService.getRecipes();
+
   }
 
   ngOnDestroy() {
@@ -44,6 +45,7 @@ export class AddRecipeComponent implements OnInit, OnDestroy{
   public addRecipe() {
     this.recipeService.postRecipe(this.recipe);
     this.clearRecipe();
+    this.dialogRef.close();
   }
 
   // Adds new empty ingredient to current recipe.
