@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Recipe } from '../classes/recipe';
 import { RecipeService } from '../recipe-service';
@@ -21,7 +21,7 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
   }
 
   constructor(private recipeService: RecipeService,
-    public dialogRef: MatDialogRef<AddRecipeComponent> ) {
+    public dialogRef: MatDialogRef<AddRecipeComponent>) {
 
   }
 
@@ -42,14 +42,16 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
   }
 
   // Adds new recipe by calling API backend.
-  public addRecipe() {
-    this.recipeService.postRecipe(this.recipe);
+  addRecipe() {
+    this.recipeService.postRecipe(this.recipe).subscribe(res => {
+      console.log(res + " got answer");
+    });
     this.clearRecipe();
     this.dialogRef.close();
   }
 
   // Adds new empty ingredient to current recipe.
-  public addNewIngredient() {
+  addNewIngredient() {
     this.recipe.ingredients.push({
         name: '',
         amount: 0,

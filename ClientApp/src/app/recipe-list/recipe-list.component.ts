@@ -1,5 +1,7 @@
 import { Component, Inject, Injectable, OnDestroy, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { Recipe } from "../classes/recipe";
+import { RecipeDetailsComponent } from "../recipe-details/recipe-details.component";
 import { RecipeService } from "../recipe-service";
 
 @Component({
@@ -15,9 +17,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[] = [];
 
   // Mat table definitions
-  displayedColumns: string[] = ['name', 'description', 'ingredients'];
+  displayedColumns: string[] = ['name', 'description', 'ingredients', 'actions'];
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService, public dialog: MatDialog) {
 
   }
 
@@ -31,6 +33,16 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   ngOnChanges() {
     // Change detection things here
+  }
+
+  openRecipeDetailsDialog(recipe: Recipe): void {
+    const dialogRef = this.dialog.open(RecipeDetailsComponent ,{
+      data: recipe
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('dialog closed');
+    });
   }
 
   showRecipes() {

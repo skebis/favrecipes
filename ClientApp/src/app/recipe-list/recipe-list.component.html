@@ -22,6 +22,12 @@
       </ng-template>
     </mat-cell>
   </ng-container>
+  <ng-conteiner matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+    <mat-cell *matCellDef="let recipe">
+      <button mat-button color="accent" (click)="openRecipeDetailsDialog(recipe)">Details</button>
+    </mat-cell>
+  </ng-conteiner>
   <!--<tbody>
     <tr *ngFor="let recipe of recipes">
       <td>{{ recipe.name }}</td>
