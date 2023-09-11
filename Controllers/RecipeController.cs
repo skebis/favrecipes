@@ -9,12 +9,10 @@ namespace FavRecipes.Controllers;
 public class RecipeController : ControllerBase
 {
     private readonly RecipeContext _recipeContext;
-    //private readonly IngredientContext _ingredientContext;
 
-    public RecipeController(RecipeContext recipeContext/*, IngredientContext ingredientContext*/)
+    public RecipeController(RecipeContext recipeContext)
     {
         _recipeContext = recipeContext;
-        //_ingredientContext = ingredientContext;
     }
 
     // GET: api/recipe
