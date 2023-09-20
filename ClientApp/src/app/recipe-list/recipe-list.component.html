@@ -2,41 +2,47 @@
 
 <p *ngIf="!recipes?.length"><em>Requesting... or you don't have any recipes.</em></p>
 
-<table mat-table [dataSource]="recipes" class="mat-elevation-z8">
+<table mat-table [dataSource]="recipes" class="mat-elevation-z8" multiTemplateDataRows>
+
+  <!-- Name column -->
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let recipe"> {{recipe.name}} </mat-cell>
+    <mat-cell *matCellDef="let recipe">{{recipe.name}}</mat-cell>
   </ng-container>
+
+  <!-- Description column -->
   <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-    <mat-cell *matCellDef="let recipe"> {{recipe.description}} </mat-cell>
+    <mat-header-cell  *matHeaderCellDef>Description</mat-header-cell>
+    <mat-cell *matCellDef="let recipe">{{recipe.description}}</mat-cell>
   </ng-container>
+
+  <!-- Ingredients column -->
   <ng-container matColumnDef="ingredients">
-    <mat-header-cell *matHeaderCellDef>Ingredients</mat-header-cell>
+    <mat-header-cell  *matHeaderCellDef>Ingredients</mat-header-cell>
+    <mat-cell *matCellDef="let recipe">{{recipe.ingredients.length}}</mat-cell>
+  </ng-container>
+
+  <!-- Expandable ingredients row -->
+  <ng-container matColumnDef="expandedIngredients">
     <mat-cell *matCellDef="let recipe">
-      <ng-container *ngFor="let ingredient of recipe.ingredients">
-        <!--dropdown list here for all ingredients-->
-      </ng-container>
-      <ng-template #emptyIngredients>
-        No ingredients
-      </ng-template>
+      <div *ngFor="let ing of recipe.ingredients"
+                    [@detailExpand]="recipe == expandedRecipe ? 'expanded' : 'collapsed'">{{ing.name}}</div>
     </mat-cell>
   </ng-container>
+
+  <!-- Actions column -->
   <ng-conteiner matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
     <mat-cell *matCellDef="let recipe">
       <button mat-button color="accent" (click)="openRecipeDetailsDialog(recipe)">Details</button>
     </mat-cell>
   </ng-conteiner>
-  <!--<tbody>
-    <tr *ngFor="let recipe of recipes">
-      <td>{{ recipe.name }}</td>
-      <td>{{ recipe.description }}</td>
-      <td *ngFor="let ingredient of recipe.ingredients">{{ ingredient.name }} {{ingredient.amount}} {{ingredient.unit}}</td>
-    </tr>
-  </tbody><-->
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           (click)="expandedRecipe = expandedRecipe === row ? null : row"
+           class="recipe-row"></mat-row>
+  <tr mat-row *matRowDef="let row; columns: ['expandedIngredients']" class="expanded-ingredients-row"></tr>
 </table>
 
 <!--<button mat-raised-button color="accent" (click)="showRecipes()">Show recipes</button>-->
