@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable, OnDestroy, OnInit } from "@angular/core";
+import { Component, Injectable, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Recipe } from "../classes/recipe";
 import { RecipeDetailsComponent } from "../recipe-details/recipe-details.component";
@@ -36,7 +36,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   expandedRecipe: Recipe | null;
 
-  constructor(private recipeService: RecipeService, public dialog: MatDialog) {
+  constructor(private recipeService: RecipeService, private dialog: MatDialog) {
     this.expandedRecipe = null;
     this.recipes = [];
   }
@@ -58,12 +58,56 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       data: recipe
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(res => {
       console.log('dialog closed');
     });
   }
 
-  showRecipes() {
+  // Deletes the recipe, triggered by a click event
+  deleteRecipe(id: string): void {
+    this.recipeService.deleteRecipe(id).subscribe(res => {
+      console.log("recipe deleted succesfully")
+      this.showRecipes();
+    },
+      error => {
+        console.log("encountered an error");
+      }
+    )
+  }
+
+  // Add two recipes for fast and easy testing purposes
+  addTestRecipes() {
+    let res1: Recipe = {
+      name: 'makarylliloota',
+      ingredients: [
+        { name: 'makaroni', amount: 3, unit: 'dl' },
+        { name: 'sipuli', amount: 1, unit: 'kpl' },
+        { name: 'jauheliha', amount: 400, unit: 'g' }
+      ],
+      description: 'maukkaan hyvä ja herkullinen loota'
+    }
+    let res2: Recipe = {
+      name: 'maukas munakas',
+      ingredients: [
+        { name: 'kananmuna', amount: 3, unit: 'kpl' },
+        { name: 'sipuli', amount: 1, unit: 'pieni' },
+        { name: 'suola', amount: 1, unit: 'tl' }
+      ],
+      description: 'herkullinen ranskalainen munakas nam'
+    }
+    this.recipeService.postRecipe(res1).subscribe(res => {
+      console.log("test recipe 1 added succesfully");
+      this.recipes.push(res1);
+    })
+    this.recipeService.postRecipe(res2).subscribe(res => {
+      console.log("test recipe 2 added succesfully");
+      this.recipes.push(res2);
+    })
+    this.showRecipes();
+  }
+
+  // Fetch all recipes and show them in a table.
+  private showRecipes() {
     this.recipeService.getRecipes().subscribe(res => {
       this.recipes = res;
     });

@@ -28,7 +28,7 @@ public class RecipeController : ControllerBase
     // GET: api/recipe/5
     // <snippet_GetByID>
     [HttpGet("{id}")]
-    public async Task<ActionResult<RecipeDTO>> GetRecipeItem(long id)
+    public async Task<ActionResult<RecipeDTO>> GetRecipeItem(Guid id)
     {
         var recipeItem = await _recipeContext.RecipeItems.FindAsync(id);
 

@@ -16,11 +16,8 @@ const providers = [
     provide: 'BASE_API_URL', useFactory: () => "api/", deps: []
   },
   {
-    provide: 'GET_RECIPE', useFactory:() => "recipe", deps: []
+    provide: 'BASE_RECIPE_URL', useFactory:() => "recipe/", deps: []
   },
-  {
-    provide: 'POST_RECIPE', useFactory: () => "recipe", deps: []
-  }
 ];
 
 if (environment.production) {
