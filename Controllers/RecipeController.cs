@@ -58,6 +58,7 @@ public class RecipeController : ControllerBase
             return NotFound();
         }
 
+        // Make updated changes here, currently only a name can be changed!
         recipeItem.Name = recipeDTO.Name;
 
         try

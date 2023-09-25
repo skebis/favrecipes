@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<RecipeContext>(opt =>
-    opt.UseInMemoryDatabase("FavRecipes"));
-builder.Services.AddControllersWithViews();
+    opt.UseSqlite($"Data Source={RecipeContext.dbFileName}"));
+//builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

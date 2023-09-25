@@ -2,12 +2,13 @@
 
 namespace FavRecipes.Models;
 
-public class IngredientContext : DbContext
-{
-    public IngredientContext(DbContextOptions<IngredientContext> options)
-        : base(options)
-    {
-    }
+// This is currently not used at all.
+//public class IngredientContext : DbContext
+//{
+//    public IngredientContext(DbContextOptions<IngredientContext> options)
+//        : base(options)
+//    {
+//    }
 
-    public DbSet<Ingredient> IngredientItems { get; set; } = null!;
-}
+//    public DbSet<Ingredient> IngredientItems { get; set; } = null!;
+//}
