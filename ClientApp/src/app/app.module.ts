@@ -9,29 +9,31 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     AddRecipeComponent,
     RecipeListComponent,
+    RecipeDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    MaterialModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'showrecipes', component: RecipeListComponent }
+      { path: 'showrecipes', component: RecipeListComponent },
+      { path: 'recipe/:id', component: RecipeDetailsComponent },
+      { path: '**', pathMatch: 'full', component: HomeComponent }
     ]),
-    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

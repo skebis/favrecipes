@@ -36,7 +36,7 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
     <mat-cell (click)="$event.stopPropagation()" *matCellDef="let recipe">
-      <button mat-button color="accent" (click)="openRecipeDetailsDialog(recipe)">Details</button>
+      <button mat-button color="accent" (click)="routeRecipeDetails(recipe.recipeId)">Details</button>
       <button mat-raised-button color="warn" (click)="deleteRecipe(recipe.recipeId)">Delete</button>
     </mat-cell>
   </ng-container>

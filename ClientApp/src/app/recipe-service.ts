@@ -23,4 +23,8 @@ export class RecipeService {
   public deleteRecipe(id: string): Observable<any> {
     return this.http.delete(this.baseUrl + this.baseApiUrl + this.apiRecipe + id);
   }
+
+  public getRecipe(id: string): Observable<any> {
+    return this.http.get<Recipe>(this.baseUrl + this.baseApiUrl + this.apiRecipe + id);
+  }
 }

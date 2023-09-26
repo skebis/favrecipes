@@ -1,9 +1,9 @@
 import { Component, Injectable, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Recipe } from "../classes/recipe";
-import { RecipeDetailsComponent } from "../recipe-details/recipe-details.component";
 import { RecipeService } from "../recipe-service";
 import { trigger, state, style, transition, animate } from "@angular/animations";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-recipe-list',
@@ -36,7 +36,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   expandedRecipe: Recipe | null;
 
-  constructor(private recipeService: RecipeService, private dialog: MatDialog) {
+  constructor(private recipeService: RecipeService, private dialog: MatDialog, private router: Router) {
     this.expandedRecipe = null;
     this.recipes = [];
   }
@@ -53,14 +53,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     // Change detection things here
   }
 
-  openRecipeDetailsDialog(recipe: Recipe): void {
-    const dialogRef = this.dialog.open(RecipeDetailsComponent ,{
-      data: recipe
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      console.log('dialog closed');
-    });
+  // Routes to a certain recipe by id.
+  routeRecipeDetails(id: string): void {
+    this.router.navigate(['/recipe', id], );
   }
 
   // Deletes the recipe, triggered by a click event
