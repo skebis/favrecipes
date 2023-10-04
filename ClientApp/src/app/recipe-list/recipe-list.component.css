@@ -6,3 +6,7 @@ table {
 tr.expanded-ingredients-row {
   height: 0;
 }
+
+.singular-expanded-ingredient {
+    padding: 0px 2px 0px 2px;
+}

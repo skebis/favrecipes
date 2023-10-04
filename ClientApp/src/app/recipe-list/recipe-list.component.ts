@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
     trigger('detailExpand', [
       state('expanded', style({
         height: '*',
+        minHeight: '35px',
       })),
       state('collapsed', style({
         height: '0px',

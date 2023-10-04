@@ -27,7 +27,7 @@
   <!-- Expandable ingredients row -->
   <ng-container matColumnDef="expandedIngredients">
     <mat-cell *matCellDef="let recipe">
-      <div *ngFor="let ing of recipe.ingredients"
+      <div class="singular-expanded-ingredient" *ngFor="let ing of recipe.ingredients"
                     [@detailExpand]="recipe == expandedRecipe ? 'expanded' : 'collapsed'">{{ing.name}}</div>
     </mat-cell>
   </ng-container>
