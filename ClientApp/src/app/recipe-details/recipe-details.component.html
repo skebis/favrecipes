@@ -1,10 +1,39 @@
-<div>
-  <div *ngIf="loading;else content">
+<div class="mat-elevation-z8">
+  <h1>Recipe details</h1>
+
+  <div class="flex-container">
+    <div *ngIf="loading;else content">
+    </div>
+
+    <ng-template #content>
+      <!-- Editable name field -->
+      <mat-form-field class="recipe-name-form-field">
+        <mat-label>Name</mat-label>
+        <input matInput [ngModel]="recipe.name" />
+      </mat-form-field>
+
+      <!-- Editable description field -->
+      <mat-form-field class="recipe-description-form-field">
+        <mat-label>Description</mat-label>
+        <input matInput [ngModel]="recipe.description" />
+      </mat-form-field>
+
+      <!-- Editable description field -->
+      <ng-container *ngFor="let ingredient of recipe.ingredients; index as i;">
+        <mat-form-field class="ingredient-name-form-field">
+          <mat-label>Ingredient {{i+1}} name</mat-label>
+          <input matInput [ngModel]="ingredient.name" />
+        </mat-form-field>
+        <mat-form-field class="ingredient-amount-form-field">
+          <mat-label>Ingredient {{i+1}} amount</mat-label>
+          <input matInput [ngModel]="ingredient.amount" />
+        </mat-form-field>
+        <mat-form-field class="ingredient-unit-form-field">
+          <mat-label>Ingredient {{i+1}} unit</mat-label>
+          <input matInput [ngModel]="ingredient.unit" />
+        </mat-form-field>
+      </ng-container>
+    </ng-template>
+    <button mat-raised-button color="accent" class="save-button" (click)="saveRecipeChanges()">Save changes</button>
   </div>
-
-  <ng-template #content>
-    <h1>{{recipe.name}} details page works!</h1>
-
-  </ng-template>
-
 </div>

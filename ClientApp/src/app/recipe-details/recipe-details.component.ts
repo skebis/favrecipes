@@ -2,6 +2,7 @@ import { Component, Injectable } from "@angular/core";
 import { RecipeService } from "../recipe-service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { Recipe } from "../classes/recipe";
 
 @Component({
   selector: 'app-recipe-details',
@@ -12,7 +13,11 @@ import { Subscription } from "rxjs";
 
 @Injectable()
 export class RecipeDetailsComponent {
-  recipe: any;
+  recipe: Recipe = {
+    name: "",
+    description: "",
+    ingredients: []
+  };
 
   subscriptions: Subscription[] = [];
   loading: boolean = true;
@@ -36,5 +41,9 @@ export class RecipeDetailsComponent {
   // Unsubscribe all subscriptions.
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  saveRecipeChanges() {
+    console.log("save changes button works!");
   }
 }

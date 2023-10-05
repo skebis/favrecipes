@@ -30,7 +30,9 @@ public class RecipeController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<RecipeDTO>> GetRecipeItem(Guid id)
     {
-        var recipeItem = await _recipeContext.RecipeItems.FindAsync(id);
+        var recipeItem = await _recipeContext.RecipeItems
+            .Include(x => x.Ingredients)
+            .FirstOrDefaultAsync(i => i.RecipeId == id);
 
         if (recipeItem == null)
         {
