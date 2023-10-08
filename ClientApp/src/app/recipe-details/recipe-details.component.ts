@@ -2,7 +2,6 @@ import { Component, Injectable } from "@angular/core";
 import { RecipeService } from "../recipe-service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { Recipe } from "../classes/recipe";
 
 @Component({
   selector: 'app-recipe-details',
@@ -13,11 +12,7 @@ import { Recipe } from "../classes/recipe";
 
 @Injectable()
 export class RecipeDetailsComponent {
-  recipe: Recipe = {
-    name: "",
-    description: "",
-    ingredients: []
-  };
+  recipe: any;
 
   subscriptions: Subscription[] = [];
   loading: boolean = true;

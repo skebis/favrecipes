@@ -1,10 +1,21 @@
-<h1>FavRecipes</h1>
+<!-- Heading -->
+<div class="heading" [@hideHeading]="toggled ? 'show' : 'hide'">
+  <h1>Welcome to FavRecipes!</h1>
+</div>
 
-<p>Welcome to FavRecipes! Here you can add and delete your favourite recipes and let the machine decide what to eat next!</p>
-
-<!--<button mat-raised-button color="raised" class="button-add-new-recipe" (click)="openAddRecipeDialog()">Add new recipe!</button>-->
+<!-- Entry / description text. -->
+<div class="entrytext">
+  <p>Welcome to FavRecipes! Here you can add and delete your favourite recipes and let the machine decide what to eat next!</p>
+</div>
 
 <!-- Floating Action button for adding new recipes. -->
-<button mat-fab color="primary" (click)="openAddRecipeDialog()">
-  <mat-icon>add</mat-icon>
-</button>
+<div class="fab">
+  <button mat-fab color="primary" (click)="openAddRecipeDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<!-- Funny animation button. -->
+<div class="enlarge-button">
+  <button (click)="toggle()" mat-button color="primary">Test me!</button>
+</div>
