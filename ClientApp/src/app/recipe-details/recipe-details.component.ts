@@ -7,7 +7,7 @@ import { Subscription } from "rxjs";
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.css'],
-  providers: [RecipeService]
+  providers: []
 })
 
 @Injectable()

@@ -1,9 +1,9 @@
 import { Component, Injectable, OnDestroy, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
 import { Recipe } from "../classes/recipe";
 import { RecipeService } from "../recipe-service";
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import { Router } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: 'app-recipe-list',
@@ -24,22 +24,21 @@ import { Router } from "@angular/router";
   ],
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
-  providers: [RecipeService]
+  providers: []
 })
 
 @Injectable()
 export class RecipeListComponent implements OnInit, OnDestroy {
   // recipes is the list of all current recipes in a table. Used for showing recipes to user.
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
 
   // Mat table definitions
   displayedColumns: string[] = ['name', 'description', 'ingredients', 'actions'];
 
   expandedRecipe: Recipe | null;
 
-  constructor(private recipeService: RecipeService, private dialog: MatDialog, private router: Router) {
+  constructor(private recipeService: RecipeService, private router: Router) {
     this.expandedRecipe = null;
-    this.recipes = [];
   }
 
   ngOnInit(): void {

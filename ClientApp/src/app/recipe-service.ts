@@ -3,7 +3,9 @@ import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Recipe } from "./classes/recipe";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RecipeService {
   constructor(private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,

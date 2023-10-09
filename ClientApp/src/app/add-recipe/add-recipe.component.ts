@@ -7,7 +7,7 @@ import { RecipeService } from '../recipe-service';
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
   styleUrls: ['./add-recipe.component.css'],
-  providers: [RecipeService]
+  providers: []
 })
 
 @Injectable()
